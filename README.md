@@ -9,10 +9,11 @@ client side and server side usage:
 
 | Endpoint      | Method        | Description  |
 | ------------- |:-------------:| -----:|
-| `/courses/create/header` | POST | Create a new course to the database |
-| `/courses/:courseId/header` | GET | Retrieve an course by id |
-| `/courses/:courseId/header` | PATCH | Update an course by id |
-| `/courses/:courseId/header` | DELETE | Delete an course by id |
+| `/courses` | POST | Create a new course to the database |
+| `/courses/:courseId` | GET | Retrieve an course by id |
+| `/courses/:courseId` | PATCH | Update an course by id |
+| `/courses/:courseId` | PUT | Replace an course by id |
+| `/courses/:courseId` | DELETE | Delete an course by id |
 
 ## Related Projects
 
