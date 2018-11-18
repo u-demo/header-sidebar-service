@@ -18,7 +18,7 @@ const descriptionPrefix = [
   'Comprehensive programming course for ',
   'Get an in-depth understanding of core skills & advanced in ',
   'Master design principles, best practices and coding conventions for ',
-]
+];
 const temp = [];
 
 const getRandomNum = max => Math.floor(Math.random() * Math.floor(max));
