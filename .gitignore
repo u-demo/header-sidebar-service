@@ -24,3 +24,6 @@ coverage
 db.sql
 bundle.js
 *.env
+
+#DB
+*.csv
