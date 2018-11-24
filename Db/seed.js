@@ -1,4 +1,4 @@
-//const db = require('.index.js');
+//const db = require('index.js');
 const { hacker, name } = require('faker');
 const path = require('path');
 const csv = require('fast-csv');
@@ -35,6 +35,13 @@ const generateNewCourse = function generateNewCourse(i) {
   const monthCreated = getRandomNumInRange(1, 12);
   const yearUpdated = getRandomNumInRange(yearCreated, 9);
   const monthUpdated = getRandomNumInRange(monthCreated, 12);
+  // Generate cc_options
+  const ccLength = getRandomNum(4);
+  const ccSet = new Set();
+  for (let j = 0; j < ccLength; j += 1) {
+    ccSet.add(ccOptions[getRandomNum(9)]);
+  }
+  const ccs = Array.from(ccSet).join(', ');
   const newCourse = {
     id: i,
     title: temp[i],
@@ -54,7 +61,7 @@ const generateNewCourse = function generateNewCourse(i) {
     total_articles: getRandomNumInRange(1, 15),
     total_downloads: getRandomNumInRange(3, 15),
     active_coupon: 'WEDEMO',
-    cc_options: ccOptions[getRandomNum(ccOptions.length)],
+    cc_options: ccs,
   };
   return newCourse;
 };
@@ -107,6 +114,10 @@ function createCourseData(callback) {
   }
 }
 
+const writeToDB = function writeToDB() {
+  console.log('WRITING TO DB!');
+};
+
 // Read CSV file with course title build temp array for title
 csv
   .fromPath(path.join(__dirname, '/courseData.csv'))
@@ -117,46 +128,3 @@ csv
   .on('end', () => {
     createCourseData(writeToDB);
   });
-
-const writeToDB = function writeToDB() {
-  console.log('WRITING TO DB!');
-};
-
-
-// csv
-//   .fromPath(path.join(__dirname, '/courses.csv'))
-//   .on('data', (newData) => {
-//     console.log(newData);
-//   })
-
-// Read CSV file with course title build temp array for title
-// csv
-//   .fromPath(path.join(__dirname, '/courses.csv'))
-//   .on('data', (data) => {
-//     console.log(data);
-    
-//   })
-//   .on('end', () => {
-//     console.log('hi');
-//   });
-  // .on(() => {
-    
-  //   //if(error) console.log(error);
-  //   for(let i = 1; i < 6; i+=1){
-  //     csvStream.write(temp[i]+', '+i);
-  //   }
-  //   csvStream.end();
-  
-
-
-
-// For each line of data in new CSV file,
-  // make query to insert row
-
-
-// client.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
-//   console.log(err ? err.stack : res.rows[0].message) // Hello World!
-//   client.end();
-//   });
-
-
