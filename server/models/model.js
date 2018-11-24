@@ -17,6 +17,25 @@ const connection = mysql.createConnection({
   port: process.env.DB_PORT,
 });
 
+const handleDisconnect = () => {
+  mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE,
+    port: process.env.DB_PORT,
+  });
+};
+
+connection.on('error', (err) => {
+  if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+    console.log('IDLE DISCONNECT!');
+    handleDisconnect();
+  } else {
+    throw new Error(err);
+  }
+});
+
 const db = Promise.promisifyAll(connection, { multiArgs: true });
 
 const executeQuery = query => db.queryAsync(query);
