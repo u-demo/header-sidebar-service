@@ -2,7 +2,7 @@ const nr = require('newrelic');
 const bodyParser = require('body-parser');
 const path = require('path');
 const express = require('express');
-const models = require('./models/model.js');
+const db = require('./models/model.js');
 
 const PORT = 3003;
 const app = express();
@@ -16,19 +16,13 @@ app.use('/courses/:courseId', express.static(path.join(__dirname, '/../public/di
 
 app.get('/courses/:courseId/header', (req, res) => {
   const id = req.params.courseId;
-  models.Course.getCourseData(id)
+  db.any(`SELECT * FROM course WHERE id=${id}`, [true])
     .then((courseData) => {
-      const resData = courseData[0][0];
-      models.CourseCC.getCCOptions(id)
-        .then((ccData) => {
-          const [rawData] = ccData;
-          const ccOptions = rawData.map(data => data.cc_option);
-          resData.ccOptions = ccOptions;
-          res.json(resData);
-        })
-        .catch((err) => {
-          res.status(500).send(err);
-        });
+      const course = courseData[0];
+      console.log('=====================');
+      console.log(course);
+      console.log('=====================');
+      res.json(course);
     })
     .catch((err) => {
       res.status(500).send(err);

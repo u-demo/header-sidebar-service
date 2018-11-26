@@ -1,13 +1,21 @@
-const mysql = require('mysql');
-const Promise = require('bluebird');
-require('dotenv').config();
+const promise = require('bluebird');
 
-// use below to run locally
-const connection = mysql.createConnection({
-  user: 'root',
-  password: 'student',
-  database: 'headerSidebar',
-});
+const initOptions = {
+  promiseLib: promise,
+};
+
+const pgp = require('pg-promise')(initOptions);
+
+const config = {
+  host: 'localhost',
+  port: 5432,
+  user: 'postgres',
+  password: '1234',
+  database: 'postgres',
+};
+const db = pgp(config);
+
+module.exports = db;
 
 // use below to run from aws
 // const connection = mysql.createConnection({
@@ -18,25 +26,5 @@ const connection = mysql.createConnection({
 //   port: process.env.DB_PORT,
 // });
 
-const db = Promise.promisifyAll(connection, { multiArgs: true });
+// const db = Promise.promisifyAll(connection, { multiArgs: true });
 
-const executeQuery = query => db.queryAsync(query);
-
-class Model {
-  constructor(tablename) {
-    this.tablename = tablename;
-  }
-
-  getCourseData(courseId) {
-    const queryStr = `SELECT * FROM ${this.tablename} WHERE id = ${courseId}`;
-    return executeQuery(queryStr);
-  }
-
-  getCCOptions(courseId) {
-    const queryStr = `SELECT cc_option FROM CC WHERE id IN (SELECT cc_id FROM ${this.tablename} WHERE course_id = ${courseId})`;
-    return executeQuery(queryStr);
-  }
-}
-
-module.exports.Course = new Model('Course');
-module.exports.CourseCC = new Model('Course_CC');
