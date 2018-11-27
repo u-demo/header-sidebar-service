@@ -4,15 +4,15 @@ import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Trailer.css';
 
 const Trailer = (props) => {
-  const btnSize = () => (this.props.onTrailer ? { fontSize: '5em', transition: '0.5s' } : { fontSize: '3em', transition: '0.5s' });
+  const btnSize = () => (props.onTrailer ? { fontSize: '5em', transition: '0.5s' } : { fontSize: '3em', transition: '0.5s' });
   return (
     <section className={ styles.trailerBox }>
       <div className={ styles.trailerContainer }>
         <div className={ styles.trailer }>
-          <img alt="" className={ `${styles.courseImg} ${styles.sidebarImg}` } src={this.props.img} />
+          <img alt="" className={ `${styles.courseImg} ${styles.sidebarImg}` } src={props.img} />
           <div className={ `${styles.playbtn} ${styles.sidebarImg}` }
-            onMouseEnter={ () => this.props.trailerHoverHandler() }
-            onMouseLeave={ () => this.props.trailerHoverHandler() }>
+            onMouseEnter={ () => props.trailerHoverHandler() }
+            onMouseLeave={ () => props.trailerHoverHandler() }>
             <FontAwesomeIcon className={ styles.playbtnIcon }
               icon={ faPlayCircle } style={ btnSize() }/>
           </div>
