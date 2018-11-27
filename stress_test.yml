@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:3003'
+  processor: "./randomNumberGenerator.js"
+  phases:
+    - duration: 10
+      arrivalRate: 1000
+scenarios:
+  - name: "Request a course page"
+    flow:
+      - function: "generateRandomId"
+      - get:
+          url: "/courses/{{ courseId }}/header"
+          json: 
+            courseId: "{{ courseId }}"
+      

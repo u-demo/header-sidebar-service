@@ -19,9 +19,6 @@ app.get('/courses/:courseId/header', (req, res) => {
   db.any(`SELECT * FROM course WHERE id=${id}`, [true])
     .then((courseData) => {
       const course = courseData[0];
-      console.log('=====================');
-      console.log(course);
-      console.log('=====================');
       res.json(course);
     })
     .catch((err) => {
