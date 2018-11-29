@@ -1,3 +1,4 @@
+require("dotenv").config();
 const promise = require('bluebird');
 
 const initOptions = {
@@ -10,11 +11,10 @@ const pgp = require('pg-promise')(initOptions);
 //   host: 'localhost',
 //   port: 5432,
 //   user: 'postgres',
-//   password: '1234',
+//   password: 'postgres',
 //   database: 'postgres',
 // };
-
-const db = pgp('postgresql://power_user:1234@ec2-18-206-55-17.compute-1.amazonaws.com:5432/postgres');
+const db = pgp(process.env.DB_URL);
 db.connect()
   .then((obj) => {
     obj.done(); // success, release the connection;
