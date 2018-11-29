@@ -7,7 +7,7 @@ const db = require('./models/model.js');
 const PORT = 3003;
 const app = express();
 app.listen(PORT, () => {
-  console.log(`listening on http://localhost:${PORT}/`);
+  console.log(`listening on PORT:${PORT}/`);
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
