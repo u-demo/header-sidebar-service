@@ -1,4 +1,3 @@
-//const db = require('index.js');
 const { hacker, name } = require('faker');
 const path = require('path');
 const csv = require('fast-csv');
@@ -89,7 +88,7 @@ const csvStreamCourses = csv.format({ headers: true }).transform(row => ({
   cc_options: row.cc_options,
 }));
 
-const writableStream = fs.createWriteStream('./courses.csv');
+const writableStream = fs.createWriteStream('./Db/courses.csv');
 csvStreamCourses.pipe(writableStream);
 const numData = 10000000;
 let i = 0;
@@ -109,20 +108,15 @@ function createCourseData(callback) {
   if (i < numData && !memoryAllows) {
     writableStream.once('drain', createCourseData);
   } else {
-    console.log(`WRITING ${numData} data to CSV DONE!`);
+    console.log(`WRITING ${numData} data to course.csv DONE!`);
     csvStreamCourses.end();
   }
 }
-
-const writeToDB = function writeToDB() {
-  console.log('WRITING TO DB!');
-};
 
 // Read CSV file with course title build temp array for title
 csv
   .fromPath(path.join(__dirname, '/courseData.csv'))
   .on('data', (data) => {
-    // console.log(data);
     temp.push(data[1]);
   })
   .on('end', () => {

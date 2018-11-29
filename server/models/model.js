@@ -14,10 +14,12 @@ const pgp = require('pg-promise')(initOptions);
 //   password: 'postgres',
 //   database: 'postgres',
 // };
+// const db = pgp(config);
+
 const db = pgp(process.env.DB_URL);
 db.connect()
   .then((obj) => {
-    obj.done(); // success, release the connection;
+    obj.done(); 
   })
   .catch((error) => {
     console.log('ERROR:', error.message || error);

@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 const path = require('path');
 
-const coursesCSV = path.join(__dirname, '../courses.csv');
+const coursesCSV = path.join(__dirname, '/courses.csv');
 
 const client = new Client({
   user: 'postgres',
@@ -17,7 +17,7 @@ const dropDatabase = () => {
     .catch(err => console.log(err));
 };
 const createDatabase = () => {
-  client.query('CREATE DATABASE IF NOT EXISTS header_sidebar_service;')
+  client.query('CREATE DATABASE header_sidebar_service;')
     .then(() => {
       console.log('Database Created!');
     })
@@ -26,7 +26,7 @@ const createDatabase = () => {
 const createTables = () => (
   // creates course table
   client.query(`
-    CREATE TABLE course (
+    CREATE TABLE IF NOT EXISTS course (
       id SERIAL PRIMARY KEY,
       title VARCHAR(200),
       description VARCHAR(255),
@@ -57,22 +57,20 @@ const populateCourseData = () => {
   client.query(
     `COPY course(id, title, description, tag, rating, count_ratings, enrollment, created_by, created_at, updated_at, language, img_url, list_price, discount_price, video_hrs, total_articles, total_downloads, active_coupon, cc_options) FROM '${coursesCSV}' DELIMITER ',' CSV HEADER;`,
   )
-    .then((data) => {
-      console.log(data);
+    .then(() => {
       console.log('Courses correctly copied!');
     })
     .catch(err => console.log(err));
 };
 
-
 client.connect()
   .then(() => console.log('Postgres Connected!'))
-  // .then(() => {
-  //   dropDatabase();
-  // })
-  // .then(() => {
-  //   createDatabase();
-  // })
+  .then(() => {
+    dropDatabase();
+  })
+  .then(() => {
+    createDatabase();
+  })
   .then(() => {
     createTables();
   })
@@ -81,19 +79,5 @@ client.connect()
   })
   .catch(err => console.log(err));
   
-// client.query('DROP DATABASE IF EXISTS headerSidebar')
-//   .then(() => client.queryAsync('CREATE DATABASE IF NOT EXISTS headerSidebar'))
-//   .then(() => console.log(`Connected to CheckoutData database as ID ${client.threadId}`))
-//   .then(() => client.queryAsync('USE headerSidebar'))
-//   .then(() => createTables(client))
-//   .then(() => populateCourseData())
-//   .then(() => populateCCData())
-//   .then(() => populateCourseCCData())
-//   .then(() => client.end())
-//   .then(() => process.exit())
-//   .catch((err) => {
-//     throw new Error(err);
-//   });
-
 
 //module.exports = db;
