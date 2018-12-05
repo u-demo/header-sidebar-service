@@ -31,9 +31,9 @@ const TagRatingsEnroll = ({ course, isHeaderFixed }) => {
         style={ tagStyle() }>{ course.tag }</div> // Render if tag is not null
     }
       <div className={ styles.ratings }>
-        <HeaderStars avgRating={ course.avg_rating }/>
-        <span className={ styles.avgRating }>{ course.avg_rating }</span>
-        <span>{ `(${course.total_ratings} ratings)` }</span>
+        <HeaderStars avgRating={ course.rating }/>
+        <span className={ styles.avgRating }>{ course.rating }</span>
+        <span>{ `(${course.count_ratings} ratings)` }</span>
       </div>
       <div>{ `${course.enrollment} students enrolled` }</div>
     </section>

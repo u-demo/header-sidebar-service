@@ -2,6 +2,19 @@
 
 > Project description
 
+# Router Endpoints for Header/Side
+
+The following API endpoints have been defined for
+client side and server side usage:
+
+| Endpoint      | Method        | Description  |
+| ------------- |:-------------:| -----:|
+| `/courses` | POST | Create a new course to the database |
+| `/courses/:courseId` | GET | Retrieve an course by id |
+| `/courses/:courseId` | PATCH | Update an course by id |
+| `/courses/:courseId` | PUT | Replace an course by id |
+| `/courses/:courseId` | DELETE | Delete an course by id |
+
 ## Related Projects
 
   - https://github.com/teamName/repo

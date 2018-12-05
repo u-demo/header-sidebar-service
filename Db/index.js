@@ -1,104 +1,83 @@
-const mysql = require('mysql');
-const Promise = require('bluebird');
-const seeds = require('./seed.js');
-require('dotenv').config();
+const { Client } = require('pg');
+const path = require('path');
 
-// use below to run locally
-// const connection = mysql.createConnection({ user: 'root' });
+const coursesCSV = path.join(__dirname, '/courses.csv');
 
-// use below to run from aws
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
+const client = new Client({
+  user: 'postgres',
+  password: '1234',
+  database: 'postgres',
+  port: 5432,
 });
-
-const db = Promise.promisifyAll(connection, { multiArgs: true });
-
+const dropDatabase = () => {
+  client.query('DROP DATABASE IF EXISTS header_sidebar_service;')
+    .then(() => {
+      console.log('Database Dropped!');
+    })
+    .catch(err => console.log(err));
+};
+const createDatabase = () => {
+  client.query('CREATE DATABASE header_sidebar_service;')
+    .then(() => {
+      console.log('Database Created!');
+    })
+    .catch(err => console.log(err));
+};
 const createTables = () => (
   // creates course table
-  db.queryAsync(`
-    CREATE TABLE IF NOT EXISTS Course (
-      id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      title VARCHAR(70),
+  client.query(`
+    CREATE TABLE IF NOT EXISTS course (
+      id SERIAL PRIMARY KEY,
+      title VARCHAR(200),
       description VARCHAR(255),
       tag VARCHAR(13),
-      avg_rating DECIMAL(2, 1),
-      total_ratings INTEGER(3),
-      enrollment INTEGER(3),
-      created_by VARCHAR(40),
-      last_updated VARCHAR(7),
-      language VARCHAR(25),
-      img_url VARCHAR(100),
+      rating NUMERIC(2, 1),
+      count_ratings SERIAL,
+      enrollment SERIAL,
+      created_by NAME, 
+      created_at VARCHAR(7),
+      updated_at VARCHAR(7),
+      language VARCHAR(17),
+      img_url VARCHAR(61),
       list_price VARCHAR(7),
       discount_price VARCHAR(7),
-      video_hrs DECIMAL(3, 1),
-      total_articles INTEGER(3),
-      total_downloads INTEGER(3),
-      active_coupon VARCHAR(11)
+      video_hrs NUMERIC(3,1),
+      total_articles SERIAL, 
+      total_downloads SERIAL,
+      active_coupon VARCHAR(11),
+      cc_options VARCHAR(27)
     );`)
-    // creates CC table
     .then(() => {
-      db.queryAsync(`
-        CREATE TABLE IF NOT EXISTS CC (
-          id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-          cc_option VARCHAR(27)
-      );`);
+      console.log('Table Created!');
     })
-    .then(() => {
-      db.queryAsync(`
-        CREATE TABLE IF NOT EXISTS Course_CC (
-          course_id INTEGER(3),
-          cc_id INTEGER(1)     
-      );`);
-    })
-    .then(() => {
-      db.queryAsync(`
-        ALTER TABLE Course_CC ADD FOREIGN KEY (course_id) REFERENCES Course (id);
-      `);
-    })
-    .then(() => {
-      db.queryAsync(`
-        ALTER TABLE Course_CC ADD FOREIGN KEY (cc_id) REFERENCES CC (id);
-      `);
-    })
+    .catch(err => console.log(err))
 );
 
 const populateCourseData = () => {
-  const { courseSeeds } = seeds;
-  const queryStr = 'INSERT INTO Course SET ?';
-  const promises = courseSeeds.map(seed => db.queryAsync(queryStr, seed));
-  return Promise.all(promises);
+  client.query(
+    `COPY course(id, title, description, tag, rating, count_ratings, enrollment, created_by, created_at, updated_at, language, img_url, list_price, discount_price, video_hrs, total_articles, total_downloads, active_coupon, cc_options) FROM '${coursesCSV}' DELIMITER ',' CSV HEADER;`,
+  )
+    .then(() => {
+      console.log('Courses correctly copied!');
+    })
+    .catch(err => console.log(err));
 };
 
-const populateCCData = () => {
-  const { ccSeeds } = seeds;
-  const queryStr = 'INSERT INTO CC SET ?';
-  const promises = ccSeeds.map(seed => db.queryAsync(queryStr, seed));
-  return Promise.all(promises);
-};
+client.connect()
+  .then(() => console.log('Postgres Connected!'))
+  .then(() => {
+    dropDatabase();
+  })
+  .then(() => {
+    createDatabase();
+  })
+  .then(() => {
+    createTables();
+  })
+  .then(() => {
+    populateCourseData();
+  })
+  .catch(err => console.log(err));
+  
 
-const populateCourseCCData = () => {
-  const { courseCCSeeds } = seeds;
-  const queryStr = 'INSERT INTO Course_CC SET ?';
-  const promises = courseCCSeeds.map(seed => db.queryAsync(queryStr, seed));
-  return Promise.all(promises);
-};
-
-db.queryAsync('DROP DATABASE IF EXISTS headerSidebar')
-  .then(() => db.queryAsync('CREATE DATABASE IF NOT EXISTS headerSidebar'))
-  .then(() => console.log(`Connected to CheckoutData database as ID ${db.threadId}`))
-  .then(() => db.queryAsync('USE headerSidebar'))
-  .then(() => createTables(db))
-  .then(() => populateCourseData())
-  .then(() => populateCCData())
-  .then(() => populateCourseCCData())
-  .then(() => db.end())
-  .then(() => process.exit())
-  .catch((err) => {
-    throw new Error(err);
-  });
-
-module.exports = db;
+//module.exports = db;

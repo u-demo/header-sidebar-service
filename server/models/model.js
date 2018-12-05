@@ -1,60 +1,28 @@
-const mysql = require('mysql');
-const Promise = require('bluebird');
-require('dotenv').config();
+require("dotenv").config();
+const promise = require('bluebird');
 
-// use below to run locally
-// const connection = mysql.createConnection({
-//   user: 'root',
-//   database: 'headerSidebar',
-// });
-
-// use below to run from aws
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
-});
-
-const handleDisconnect = () => {
-  connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_DATABASE,
-    port: process.env.DB_PORT,
-  });
+const initOptions = {
+  promiseLib: promise,
 };
 
-connection.on('error', (err) => {
-  if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-    console.log('IDLE DISCONNECT!');
-    handleDisconnect();
-  } else {
-    throw new Error(err);
-  }
-});
+const pgp = require('pg-promise')(initOptions);
 
-const db = Promise.promisifyAll(connection, { multiArgs: true });
+// const config = {
+//   host: 'localhost',
+//   port: 5432,
+//   user: 'postgres',
+//   password: 'postgres',
+//   database: 'postgres',
+// };
+// const db = pgp(config);
 
-const executeQuery = query => db.queryAsync(query);
+const db = pgp(process.env.DB_URL);
+db.connect()
+  .then((obj) => {
+    obj.done(); 
+  })
+  .catch((error) => {
+    console.log('ERROR:', error.message || error);
+  });
 
-class Model {
-  constructor(tablename) {
-    this.tablename = tablename;
-  }
-
-  getCourseData(courseId) {
-    const queryStr = `SELECT * FROM ${this.tablename} WHERE id = ${courseId}`;
-    return executeQuery(queryStr);
-  }
-
-  getCCOptions(courseId) {
-    const queryStr = `SELECT cc_option FROM CC WHERE id IN (SELECT cc_id FROM ${this.tablename} WHERE course_id = ${courseId})`;
-    return executeQuery(queryStr);
-  }
-}
-
-module.exports.Course = new Model('Course');
-module.exports.CourseCC = new Model('Course_CC');
+module.exports = db;

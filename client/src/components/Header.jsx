@@ -15,7 +15,7 @@ const Header = ({ course }) => (
       <section className={ styles.authorUpdateContainer }>
         <div className={ styles.authorUpdate }>
           <div className={ styles.author }>{ `Created by ${course.created_by}` }</div>
-          <div className={ styles.update }>{ `Last updated ${course.last_updated}` }</div>
+          <div className={ styles.update }>{ `Last updated ${course.updated_at}` }</div>
         </div>
       </section>
       <section className={ styles.languagesContainer }>
@@ -28,8 +28,8 @@ const Header = ({ course }) => (
             <FontAwesomeIcon icon={ fas.faClosedCaptioning } style={ { color: 'white' } }/>
           </div>
           <div>
-          { course.ccOptions
-              && <span>{ `${course.ccOptions.join(', ')} [Auto-generated]` }</span>
+          { course.cc_options
+              && <span>{ `${course.cc_options} [Auto-generated]` }</span>
           }
           </div>
         </div>
