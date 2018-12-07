@@ -4,8 +4,8 @@ require('dotenv').config();
 
 // use below to run locally
 // const connection = mysql.createConnection({
-//   user: 'root',
-//   database: 'headerSidebar',
+//   user: process.env.DB_USER,
+//   database: process.env.DB_DATABASE,
 // });
 
 // use below to run from aws
