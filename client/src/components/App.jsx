@@ -11,14 +11,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      courseId: null,
       courseData: {},
-      discountPrice: '',
-      couponUsed: false,
-      headerFixed: false,
-      sidebarFixed: false,
       bannerHeight: null,
       distanceToBelowTrailer: null,
+      headerFixed: false,
+      sidebarFixed: false,
+      couponUsed: false,
       isLoading: true,
     };
     this.addScrollListener = this.addScrollListener.bind(this);
@@ -56,11 +54,12 @@ class App extends React.Component {
   }
 
   changePrice() {
-    const currentPrice = this.state.discountPrice;
-    const newPrice = `$${(Number((currentPrice).split('$')[1]) - 5).toFixed(2)}`;
+    const courseData = { ...this.state.courseData };
+    const newPrice = `$${(Number((courseData.discount_price).split('$')[1]) - 5).toFixed(2)}`;
+    courseData.discount_price = newPrice;
     if (!this.state.couponUsed) {
       this.setState({
-        discountPrice: newPrice,
+        courseData,
         couponUsed: true,
       });
     }
@@ -76,10 +75,7 @@ class App extends React.Component {
     requests.getCourseData(window.location.pathname)
       .then(data => (
         this.setState({
-          courseId: data.id,
           courseData: data,
-          discountPrice: data.discount_price,
-          listPrice: data.list_price,
           isLoading: !this.state.isLoading,
         }, () => this.addScrollListener())
       ));
@@ -103,12 +99,10 @@ class App extends React.Component {
               {this.state.sidebarFixed
                 ? <FixedSidebar
                   course={ this.state.courseData }
-                  discountPrice={ this.state.discountPrice }
                   changePrice={ this.changePrice }
                   />
                 : <Sidebar
                   course={ this.state.courseData }
-                  discountPrice={ this.state.discountPrice }
                   changePrice={ this.changePrice }
                   />
               }
