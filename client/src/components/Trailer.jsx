@@ -5,7 +5,6 @@ import styles from '../styles/Trailer.css';
 
 const Trailer = (props) => {
   const btnSize = () => (props.onTrailer ? { fontSize: '5em', transition: '0.5s' } : { fontSize: '3em', transition: '0.5s' });
-  // https://s3-us-west-1.amazonaws.com/fec-header-sidebar-photos/SpaceT+640x480.png
   return (
     <section className={ styles.trailerBox }>
       <div className={ styles.trailerContainer }>
