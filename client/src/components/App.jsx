@@ -1,23 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import fetchCourseSuccess from '../actions/changeCourse';
+
 import Header from './Header.jsx';
 import FixedHeader from './FixedHeader.jsx';
 import Sidebar from './Sidebar.jsx';
 import FixedSidebar from './FixedSidebar.jsx';
 import requests from '../lib/requests.js';
 import TopRow from './TopRow.jsx';
+
 import styles from '../styles/App.css';
+
+const mapStateToProps = state => ({
+  courseData: state.courseData,
+});
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      courseData: {},
+      // courseData: {},
       bannerHeight: null,
       distanceToBelowTrailer: null,
       headerFixed: false,
       sidebarFixed: false,
       couponUsed: false,
-      isLoading: true,
+      // isLoading: true,
       fetchError: false,
     };
     this.addScrollListener = this.addScrollListener.bind(this);
@@ -75,10 +83,11 @@ class App extends React.Component {
     // window.location.pathname === '/courses/66/'
     requests.getCourseData(window.location.pathname)
       .then(data => (
-        this.setState({
-          courseData: data,
-          isLoading: !this.state.isLoading,
-        }, () => this.addScrollListener())
+        this.props.dispatch(fetchCourseSuccess(data))
+        // this.setState({
+        //   courseData: data,
+        //   isLoading: !this.state.isLoading,
+        // }, () => this.addScrollListener())
       ))
       .catch((err) => {
         console.error('Error Fetching Data: ', err);
@@ -90,6 +99,8 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('this.props: ', this.props);
+    const { courseData } = this.props;
     if (this.state.isLoading) {
       return (
         <div>
@@ -109,14 +120,14 @@ class App extends React.Component {
           <div className={ styles.container }>
             <TopRow />
             <div className={ styles.contentBox }>
-              <Header course={ this.state.courseData }/>
+              <Header course={ courseData }/>
               {this.state.sidebarFixed
                 ? <FixedSidebar
-                  course={ this.state.courseData }
+                  course={ courseData }
                   changePrice={ this.changePrice }
                   />
                 : <Sidebar
-                  course={ this.state.courseData }
+                  course={ courseData }
                   changePrice={ this.changePrice }
                   />
               }
@@ -124,12 +135,13 @@ class App extends React.Component {
           </div>
         </div>
         {this.state.headerFixed
-          ? <FixedHeader course={ this.state.courseData } />
+          ? <FixedHeader course={ courseData } />
           : null
         }
       </div>
     );
   }
 }
+const AppContainer = connect(mapStateToProps)(App);
 
-export default App;
+export default AppContainer;

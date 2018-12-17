@@ -1,6 +1,6 @@
-const changeCourse = data => ({
-  type: 'CHANGE_COURSE_DATA',
-  data,
+const fetchCourseSuccess = data => ({
+  type: 'FETCH_COURSE_SUCCESS',
+  payload: data,
 });
 
-export default changeCourse;
+export default fetchCourseSuccess;

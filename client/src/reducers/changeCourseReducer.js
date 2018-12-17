@@ -1,8 +1,20 @@
-const changeCourseReducer = (state = {}, action) => {
+const initialState = {
+  courseData: {},
+  bannerHeight: null,
+  distanceToBelowTrailer: null,
+  headerFixed: false,
+  sidebarFixed: false,
+  couponUsed: false,
+  isLoading: true,
+  fetchError: false,
+};
+
+const changeCourseReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'CHANGE_COURSE_DATA':
+    case 'FETCH_COURSE_SUCCESS':
       return {
-        courseData: action.data,
+        courseData: action.payload,
+        isLoading: false,
       };
     default:
       return state;
