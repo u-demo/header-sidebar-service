@@ -18,6 +18,7 @@ class App extends React.Component {
       sidebarFixed: false,
       couponUsed: false,
       isLoading: true,
+      fetchError: false,
     };
     this.addScrollListener = this.addScrollListener.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -78,7 +79,14 @@ class App extends React.Component {
           courseData: data,
           isLoading: !this.state.isLoading,
         }, () => this.addScrollListener())
-      ));
+      ))
+      .catch((err) => {
+        console.error('Error Fetching Data: ', err);
+        this.setState({
+          isLoading: !this.state.isLoading,
+          fetchError: !this.state.fetchError,
+        });
+      });
   }
 
   render() {
@@ -86,6 +94,12 @@ class App extends React.Component {
       return (
         <div>
           <h2>Loading...</h2>
+        </div>
+      );
+    } if (this.state.fetchError) {
+      return (
+        <div>
+          <h3>Sorry, please search between course IDs 1 - 100.</h3>
         </div>
       );
     }

@@ -7,9 +7,6 @@ const requests = {
         }
         throw new Error(response.status);
       })
-      .catch((err) => {
-        console.error(err);
-      })
   ),
 };
 
