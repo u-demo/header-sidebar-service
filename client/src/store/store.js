@@ -1,6 +1,10 @@
-import { createStore } from 'redux';
-import changeCourseReducer from '../reducers/changeCourseReducer';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import fetchCourseReducer from '../reducers/fetchCourseReducer';
 
-const store = createStore(changeCourseReducer);
+const store = createStore(
+  fetchCourseReducer,
+  applyMiddleware(thunkMiddleware),
+);
 
 export default store;

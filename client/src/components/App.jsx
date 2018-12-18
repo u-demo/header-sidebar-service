@@ -1,32 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import fetchCourseSuccess from '../actions/changeCourse';
+import fetchCourseData from '../actions/fetchCourse';
 
 import Header from './Header.jsx';
 import FixedHeader from './FixedHeader.jsx';
 import Sidebar from './Sidebar.jsx';
 import FixedSidebar from './FixedSidebar.jsx';
-import requests from '../lib/requests.js';
 import TopRow from './TopRow.jsx';
 
 import styles from '../styles/App.css';
 
-const mapStateToProps = state => ({
-  courseData: state.courseData,
+const mapStateToProps = ({ courseData, isLoading, fetchError }) => ({
+  courseData,
+  isLoading,
+  fetchError,
 });
+
+const mapDispatchToProps = {
+  fetchCourseData,
+};
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // courseData: {},
       bannerHeight: null,
       distanceToBelowTrailer: null,
       headerFixed: false,
       sidebarFixed: false,
       couponUsed: false,
-      // isLoading: true,
-      fetchError: false,
     };
     this.addScrollListener = this.addScrollListener.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -76,41 +78,26 @@ class App extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('load', this.addScrollListener);
   }
 
   componentDidMount() {
-    // requests.getCourseData(this.state.courseId)
-    // window.location.pathname === '/courses/66/'
-    requests.getCourseData(window.location.pathname)
-      .then(data => (
-        this.props.dispatch(fetchCourseSuccess(data))
-        // this.setState({
-        //   courseData: data,
-        //   isLoading: !this.state.isLoading,
-        // }, () => this.addScrollListener())
-      ))
-      .catch((err) => {
-        console.error('Error Fetching Data: ', err);
-        this.setState({
-          isLoading: !this.state.isLoading,
-          fetchError: !this.state.fetchError,
-        });
-      });
+    this.props.fetchCourseData();
+    window.addEventListener('load', this.addScrollListener);
   }
 
   render() {
-    console.log('this.props: ', this.props);
-    const { courseData } = this.props;
-    if (this.state.isLoading) {
+    const { isLoading, fetchError, courseData } = this.props;
+    if (isLoading) {
       return (
         <div>
           <h2>Loading...</h2>
         </div>
       );
-    } if (this.state.fetchError) {
+    } if (fetchError) {
       return (
         <div>
-          <h3>Sorry, please search between course IDs 1 - 100.</h3>
+          <h3>{fetchError}</h3>
         </div>
       );
     }
@@ -142,6 +129,6 @@ class App extends React.Component {
     );
   }
 }
-const AppContainer = connect(mapStateToProps)(App);
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;
