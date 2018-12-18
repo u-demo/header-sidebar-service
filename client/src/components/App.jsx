@@ -5,7 +5,6 @@ import fetchCourseData from '../actions/fetchCourse';
 import Header from './Header.jsx';
 import FixedHeader from './FixedHeader.jsx';
 import Sidebar from './Sidebar.jsx';
-import FixedSidebar from './FixedSidebar.jsx';
 import TopRow from './TopRow.jsx';
 
 import styles from '../styles/App.css';
@@ -51,16 +50,14 @@ class App extends React.Component {
 
   addScrollListener() {
     window.addEventListener('scroll', this.handleScroll);
-    // Need to setTimeout to allow time to properly mount and calculate proper offsetHeight
-    setTimeout(() => {
-      const bannerHeight = document.querySelector('.App__banner___3EFF9').offsetHeight;
-      const topRowHeight = document.querySelector('.TopRow__topRow___SvI7h').offsetHeight;
-      const trailerHeight = document.querySelector('.Trailer__trailerBox___28ieD').offsetHeight + 3;
-      const distanceToBelowTrailer = topRowHeight + trailerHeight;
-      this.setState({
-        bannerHeight,
-        distanceToBelowTrailer,
-      });
+
+    const bannerHeight = document.querySelector('.App__banner___3EFF9').offsetHeight;
+    const topRowHeight = document.querySelector('.TopRow__topRow___SvI7h').offsetHeight;
+    const trailerHeight = document.querySelector('.Trailer__trailerBox___28ieD').offsetHeight + 3;
+    const distanceToBelowTrailer = topRowHeight + trailerHeight;
+    this.setState({
+      bannerHeight,
+      distanceToBelowTrailer,
     });
   }
 
@@ -78,12 +75,11 @@ class App extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('load', this.addScrollListener);
   }
 
   componentDidMount() {
     this.props.fetchCourseData();
-    window.addEventListener('load', this.addScrollListener);
+    setTimeout(() => this.addScrollListener(), 500);
   }
 
   render() {
@@ -107,17 +103,11 @@ class App extends React.Component {
           <div className={ styles.container }>
             <TopRow />
             <div className={ styles.contentBox }>
-              <Header course={ courseData }/>
-              {this.state.sidebarFixed
-                ? <FixedSidebar
-                  course={ courseData }
-                  changePrice={ this.changePrice }
-                  />
-                : <Sidebar
-                  course={ courseData }
-                  changePrice={ this.changePrice }
-                  />
-              }
+              <Header course={ courseData } />
+              <Sidebar
+                course={ courseData }
+                changePrice={ this.changePrice }
+                sidebarFixed={ this.state.sidebarFixed } />
             </div>
           </div>
         </div>

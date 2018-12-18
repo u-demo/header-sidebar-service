@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import changeCourseReducer from './fetchCourseReducer';
+import fetchCourseReducer from './fetchCourseReducer';
 
 const rootReducer = combineReducers({
-  changeCourseReducer,
+  fetchCourseReducer,
 });
 
 export default rootReducer;

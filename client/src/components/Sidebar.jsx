@@ -50,24 +50,30 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { course } = this.props;
+    const { course, sidebarFixed } = this.props;
     let coupon;
     if (!this.state.hasCoupon) {
-      coupon = <CouponDefault couponClickHandler={ this.couponClickHandler }
+      coupon = <CouponDefault
+        couponClickHandler={ this.couponClickHandler }
         active_coupon={ course.active_coupon } />;
     } else {
-      coupon = <CouponForm couponInputValue={ this.state.couponFormInput }
+      coupon = <CouponForm
+        couponInputValue={ this.state.couponFormInput }
         couponInputChangeHandler={ this.couponInputChangeHandler }
         couponSubmitHandler={ this.couponSubmitHandler }/>;
     }
 
     return (
       <div className={ styles.rightCol }>
-        <div className={ styles.sideBarContainer }>
-          <Trailer
-            img={ course.img_url }
-            onTrailer={ this.state.pointerOnTrailer }
-            trailerHoverHandler={ this.trailerHoverHandler } />
+        <div className={sidebarFixed
+          ? styles.fixedSideBarContainer
+          : styles.sideBarContainer }>
+          {!sidebarFixed
+          && <Trailer
+              img={ course.img_url }
+              onTrailer={ this.state.pointerOnTrailer }
+              trailerHoverHandler={ this.trailerHoverHandler } />
+          }
           <div className={ styles.belowTrailer }>
             <PurchaseBox
               discount_price={ course.discount_price }

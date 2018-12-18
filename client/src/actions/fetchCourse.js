@@ -20,9 +20,10 @@ const fetchCourseData = () => (
     // window.location.pathname === '/courses/66/'
     return requests.getCourseData(window.location.pathname)
       .then(({ response, body }) => {
+        // fetch error
         if (!response.ok) {
           dispatch(fetchCourseFailure(body.message));
-        } else {
+        } else { // response ok
           dispatch(fetchCourseSuccess(body));
         }
       });

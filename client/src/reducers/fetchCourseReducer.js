@@ -8,9 +8,7 @@ const initialState = {
 const fetchCourseReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_COURSE_REQUEST':
-      return {
-        ...state,
-      };
+      return state;
     case 'FETCH_COURSE_SUCCESS':
       return {
         ...state,
