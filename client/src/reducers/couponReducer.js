@@ -2,6 +2,7 @@ const initialState = {
   hasCoupon: false,
   couponUsed: false,
   couponPrice: '',
+  couponMessage: '',
 };
 
 const couponInput = (state = initialState, action) => {

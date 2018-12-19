@@ -69,7 +69,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const { isLoading, fetchError, courseData } = this.props;
     if (isLoading) {
       return (

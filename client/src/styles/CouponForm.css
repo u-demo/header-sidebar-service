@@ -8,15 +8,14 @@
 }
 
 .formInput {
-  flex-grow: 2;
+  width: 66.6%;
 }
 .formInput, .couponFormBtn {
-  float: left;
-  clear: left;
   padding: 1em;
 }
 
 .couponFormBtn {
+  width: 33.3%;
   background-color: #ec5252;
   color: #fff;
   border: 1px solid transparent;

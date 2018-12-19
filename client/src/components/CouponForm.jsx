@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styles from '../styles/CouponForm.css';
 
-const mapStateToProps = ({ courseDetails: { courseData } }) => ({
-  courseData,
-});
+const mapStateToProps = ({
+  courseDetails: { courseData },
+  couponInput: { couponUsed },
+}) => ({ courseData, couponUsed });
 
 class CouponForm extends React.Component {
   constructor(props) {
@@ -23,8 +24,10 @@ class CouponForm extends React.Component {
   }
 
   validateCoupon() {
-    const { courseData } = this.props;
-    if (this.input.value === courseData.active_coupon) {
+    const { courseData, couponUsed } = this.props;
+    if (couponUsed) {
+      // dispatch coupon code used message
+    } else if (this.input.value === courseData.active_coupon) {
       this.changePrice();
     } else {
       // dispatch invalid coupon message
