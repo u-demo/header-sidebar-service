@@ -27,11 +27,9 @@ class App extends React.Component {
       distanceToBelowTrailer: null,
       headerFixed: false,
       sidebarFixed: false,
-      couponUsed: false,
     };
     this.addScrollListener = this.addScrollListener.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-    this.changePrice = this.changePrice.bind(this);
   }
 
   handleScroll() {
@@ -59,18 +57,6 @@ class App extends React.Component {
       bannerHeight,
       distanceToBelowTrailer,
     });
-  }
-
-  changePrice() {
-    const courseData = { ...this.state.courseData };
-    const newPrice = `$${(Number((courseData.discount_price).split('$')[1]) - 5).toFixed(2)}`;
-    courseData.discount_price = newPrice;
-    if (!this.state.couponUsed) {
-      this.setState({
-        courseData,
-        couponUsed: true,
-      });
-    }
   }
 
   componentWillUnmount() {
@@ -105,9 +91,7 @@ class App extends React.Component {
             <TopRow />
             <div className={ styles.contentBox }>
               <Header course={ courseData } />
-              <Sidebar
-                changePrice={ this.changePrice }
-                sidebarFixed={ this.state.sidebarFixed } />
+              <Sidebar sidebarFixed={ this.state.sidebarFixed } />
             </div>
           </div>
         </div>
