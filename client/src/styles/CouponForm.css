@@ -28,3 +28,11 @@
 .couponFormBtn:active {
   background-color: #622323;
 }
+
+.couponMessage {
+  width: 100%;
+  text-align: center;
+  padding-top: 3px;
+  font-size: .85em;
+  color: #0094aa;
+}

@@ -15,8 +15,14 @@ const couponInput = (state = initialState, action) => {
     case 'CHANGE_COURSE_PRICE':
       return {
         ...state,
-        couponPrice: action.payload,
+        couponPrice: action.couponPrice,
+        couponMessage: action.couponMessage,
         couponUsed: true,
+      };
+    case 'COUPON_FAILURE_MESSAGE':
+      return {
+        ...state,
+        couponMessage: action.payload,
       };
     default:
       return state;

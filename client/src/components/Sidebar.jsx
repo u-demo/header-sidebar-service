@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeCoursePrice } from '../actions/couponActions';
+import { changeCoursePrice, couponFailureMessage } from '../actions/couponActions';
 
 import Trailer from './Trailer.jsx';
 import PurchaseBox from './PurchaseBox.jsx';
@@ -20,6 +20,7 @@ const mapStateToProps = ({ courseDetails, couponInput }) => ({
 
 const mapDispatchToProps = {
   changeCoursePrice,
+  couponFailureMessage,
 };
 
 class Sidebar extends React.Component {
@@ -44,13 +45,16 @@ class Sidebar extends React.Component {
       hasCoupon,
       couponPrice,
       changeCoursePrice,
+      couponFailureMessage
     } = this.props;
 
     let coupon;
     if (!hasCoupon) {
       coupon = <CouponDefault />;
     } else {
-      coupon = <CouponForm changeCoursePrice={changeCoursePrice}/>;
+      coupon = <CouponForm
+                  changeCoursePrice={changeCoursePrice}
+                  couponFailureMessage={couponFailureMessage}/>;
     }
 
     return (
