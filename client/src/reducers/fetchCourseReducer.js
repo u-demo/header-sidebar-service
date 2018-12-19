@@ -5,7 +5,7 @@ const initialState = {
   fetchError: '',
 };
 
-const fetchCourseReducer = (state = initialState, action) => {
+const courseDetails = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_COURSE_REQUEST':
       return state;
@@ -26,4 +26,4 @@ const fetchCourseReducer = (state = initialState, action) => {
   }
 };
 
-export default fetchCourseReducer;
+export default courseDetails;

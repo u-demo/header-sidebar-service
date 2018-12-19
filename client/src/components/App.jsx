@@ -9,7 +9,7 @@ import TopRow from './TopRow.jsx';
 
 import styles from '../styles/App.css';
 
-const mapStateToProps = ({ courseData, isLoading, fetchError }) => ({
+const mapStateToProps = ({ courseDetails: { courseData, isLoading, fetchError } }) => ({
   courseData,
   isLoading,
   fetchError,
@@ -83,6 +83,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     const { isLoading, fetchError, courseData } = this.props;
     if (isLoading) {
       return (
@@ -105,7 +106,6 @@ class App extends React.Component {
             <div className={ styles.contentBox }>
               <Header course={ courseData } />
               <Sidebar
-                course={ courseData }
                 changePrice={ this.changePrice }
                 sidebarFixed={ this.state.sidebarFixed } />
             </div>

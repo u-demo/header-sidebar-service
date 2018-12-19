@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import fetchCourseReducer from './fetchCourseReducer';
+import courseDetails from './fetchCourseReducer';
+import couponInput from './couponReducer';
 
 const rootReducer = combineReducers({
-  fetchCourseReducer,
+  courseDetails,
+  couponInput,
 });
 
 export default rootReducer;
