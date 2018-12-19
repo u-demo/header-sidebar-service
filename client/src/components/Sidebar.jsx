@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeCoursePrice, couponFailureMessage } from '../actions/couponActions';
+import { changeCoursePrice, setCouponFailureMessage } from '../actions/couponActions';
 
 import Trailer from './Trailer.jsx';
 import PurchaseBox from './PurchaseBox.jsx';
@@ -16,11 +16,13 @@ const mapStateToProps = ({ courseDetails, couponInput }) => ({
   courseData: courseDetails.courseData,
   hasCoupon: couponInput.hasCoupon,
   couponPrice: couponInput.couponPrice,
+  couponUsed: couponInput.couponUsed,
+  couponMessage: couponInput.couponMessage,
 });
 
 const mapDispatchToProps = {
   changeCoursePrice,
-  couponFailureMessage,
+  setCouponFailureMessage,
 };
 
 class Sidebar extends React.Component {
@@ -30,6 +32,8 @@ class Sidebar extends React.Component {
       pointerOnTrailer: false,
     };
     this.trailerHoverHandler = this.trailerHoverHandler.bind(this);
+    this.changePrice = this.changePrice.bind(this);
+    this.validateCoupon = this.validateCoupon.bind(this);
   }
 
   trailerHoverHandler() {
@@ -38,14 +42,33 @@ class Sidebar extends React.Component {
     });
   }
 
+  changePrice() {
+    // only works once because redux
+    // does not re-render if discount_price does not change
+    const newPrice = `$${(Number((this.props.courseData.discount_price)
+      .split('$')[1]) - 5).toFixed(2)}`;
+    const message = 'Boom, $5 off!';
+    this.props.changeCoursePrice(newPrice, message);
+  }
+
+  validateCoupon() {
+    if (this.props.couponUsed) {
+      this.props.setCouponFailureMessage('Can only use a coupon once.');
+    } else if (this.input.value === this.props.courseData.active_coupon) {
+      this.changePrice();
+    } else {
+      // dispatch invalid coupon message
+      this.props.setCouponFailureMessage('Oops, this coupon is not valid.');
+    }
+  }
+
   render() {
     const {
       courseData,
       sidebarFixed,
       hasCoupon,
       couponPrice,
-      changeCoursePrice,
-      couponFailureMessage
+      couponMessage,
     } = this.props;
 
     let coupon;
@@ -53,8 +76,9 @@ class Sidebar extends React.Component {
       coupon = <CouponDefault />;
     } else {
       coupon = <CouponForm
-                  changeCoursePrice={changeCoursePrice}
-                  couponFailureMessage={couponFailureMessage}/>;
+                  validateCoupon={this.validateCoupon}
+                  couponMessage={couponMessage}
+                  inputRef={(node) => { this.input = node; }}/>;
     }
 
     return (

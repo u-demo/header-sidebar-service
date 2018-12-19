@@ -8,9 +8,9 @@ const changeCoursePrice = (couponPrice, couponMessage) => ({
   couponMessage,
 });
 
-const couponFailureMessage = message => ({
+const setCouponFailureMessage = message => ({
   type: 'COUPON_FAILURE_MESSAGE',
   payload: message,
 });
 
-export { renderCouponInput, changeCoursePrice, couponFailureMessage };
+export { renderCouponInput, changeCoursePrice, setCouponFailureMessage };
