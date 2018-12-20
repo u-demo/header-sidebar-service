@@ -1,9 +1,9 @@
 {
   "name": "u-demo_header-sidebar",
   "version": "1.0.0",
-  "description": "FEC udemy demo header-sidebar",
+  "description": "FEC u-demo header-sidebar",
   "author": "Alex Burkowsky",
-  "license": "jest",
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=6.13.0"
   },
