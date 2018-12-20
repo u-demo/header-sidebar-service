@@ -26,10 +26,16 @@ app.get('/courses/:courseId/header', (req, res) => {
           res.json(resData);
         })
         .catch((err) => {
-          res.status(500).send(err);
+          res.status(500).send({
+            err,
+            message: 'Oops, we could not find the course you were looking for. Please search between course ID 1 through 100.',
+          });
         });
     })
     .catch((err) => {
-      res.status(500).send(err);
+      res.status(500).send({
+        err,
+        message: 'Oops, something went wrong on our side. Please try again!',
+      });
     });
 });

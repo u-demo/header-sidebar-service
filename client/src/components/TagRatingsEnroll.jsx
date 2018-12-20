@@ -28,7 +28,8 @@ const TagRatingsEnroll = ({ course, isHeaderFixed }) => {
     <section className={ styles.tagRatingsEnroll }>
     { (course.tag && !isHeaderFixed)
       && <div className={ styles.tag }
-        style={ tagStyle() }>{ course.tag }</div> // Render if tag is not null
+        style={ tagStyle() }>{ course.tag }</div>
+        // Render if tag is not null and header is not fixed
     }
       <div className={ styles.ratings }>
         <HeaderStars avgRating={ course.avg_rating }/>

@@ -9,7 +9,7 @@ const HeaderStars = ({ avgRating }) => {
       return '0%';
     }
     const decimal = avgRating.toString().split('.')[1];
-    if (decimal !== '0') {
+    if (decimal !== '0' && decimal !== undefined) {
       return `${decimal}0%`;
     }
     return '0%';

@@ -1,26 +1,21 @@
-.couponFormBtn:focus, .formInput:focus {
-  outline: 0;
-}
-
-.couponFormArea, .couponForm, .formGroup {
-  width: 100%;
-}
-
 .formGroup {
   display: flex;
   width: 100%;
 }
 
+.couponFormBtn:focus, .formInput:focus {
+  outline: 0;
+}
+
 .formInput {
-  flex-grow: 2;
+  width: 66.6%;
 }
 .formInput, .couponFormBtn {
-  float: left;
-  clear: left;
   padding: 1em;
 }
 
 .couponFormBtn {
+  width: 33.3%;
   background-color: #ec5252;
   color: #fff;
   border: 1px solid transparent;
@@ -32,4 +27,12 @@
 
 .couponFormBtn:active {
   background-color: #622323;
+}
+
+.couponMessage {
+  width: 100%;
+  text-align: center;
+  padding-top: 3px;
+  font-size: .85em;
+  color: #0094aa;
 }

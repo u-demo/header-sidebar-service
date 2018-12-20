@@ -1,14 +1,20 @@
 import React from 'react';
 import styles from '../styles/CouponForm.css';
 
-const CouponForm = ({ couponInputValue, couponInputChangeHandler, couponSubmitHandler }) => (
-  <div className={ styles.couponFormArea }>
-    <form className={ styles.couponForm } onSubmit={ couponSubmitHandler }>
-      <div className={ styles.formGroup }>
-        <input type="text" name="couponFormInput" value={ couponInputValue } placeholder="Enter Coupon" className={ styles.formInput } onChange={ couponInputChangeHandler }/>
-        <button type="submit"className={ styles.couponFormBtn }>Apply</button>
-      </div>
-    </form>
+const CouponForm = ({ validateCoupon, couponMessage, inputRef }) => (
+  <div>
+    <div className={ styles.formGroup }>
+      <input
+      type="text" name="couponFormInput" placeholder="Enter Coupon" className={ styles.formInput }
+      ref={inputRef}/>
+      <button type="button" className={ styles.couponFormBtn }
+        onClick={validateCoupon}>
+        Apply
+      </button>
+    </div>
+    <div className={ styles.couponMessage }>
+      {couponMessage}
+    </div>
   </div>
 );
 
