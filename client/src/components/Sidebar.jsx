@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeCoursePrice, setCouponFailureMessage } from '../actions/couponActions';
+import { renderCouponInput, changeCoursePrice, setCouponFailureMessage } from '../actions/couponActions';
 
 import Trailer from './Trailer.jsx';
 import PurchaseBox from './PurchaseBox.jsx';
@@ -21,6 +21,7 @@ const mapStateToProps = ({ courseDetails, couponInput }) => ({
 });
 
 const mapDispatchToProps = {
+  renderCouponInput,
   changeCoursePrice,
   setCouponFailureMessage,
 };
@@ -76,7 +77,8 @@ class Sidebar extends React.Component {
 
     let coupon;
     if (!hasCoupon) {
-      coupon = <CouponDefault />;
+      coupon = <CouponDefault 
+                  renderCouponInput={this.props.renderCouponInput}/>;
     } else {
       coupon = <CouponForm
                   validateCoupon={this.validateCoupon}
