@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/HeaderStars.css';
@@ -64,6 +65,10 @@ const HeaderStars = ({ avgRating }) => {
       </svg>
     </span>
   );
+};
+
+HeaderStars.propTypes = {
+  avgRating: PropTypes.number.isRequired,
 };
 
 export default HeaderStars;

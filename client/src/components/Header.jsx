@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import TagRatingsEnroll from './TagRatingsEnroll.jsx';
@@ -37,5 +38,9 @@ const Header = ({ course }) => (
     </div>
   </div>
 );
+
+Header.propTypes = {
+  course: PropTypes.object.isRequired,
+};
 
 export default Header;

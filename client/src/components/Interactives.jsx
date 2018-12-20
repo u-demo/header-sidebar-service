@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt } from '@fortawesome/free-regular-svg-icons';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Interactives.css';
 
-const Interactives = ({ total_downloads }) => (
+const Interactives = ({ totalDownloads }) => (
   <section>
     <div>
       <div className={ styles.interactiveHeader }>
@@ -16,11 +17,15 @@ const Interactives = ({ total_downloads }) => (
         <span className={ styles.featureIcon }>
           <FontAwesomeIcon icon={ faFileAlt } fixedWidth/>
         </span>
-        <span className={ styles.featureText }>{ `${total_downloads} downloadable resources` }</span>
+        <span className={ styles.featureText }>{ `${totalDownloads} downloadable resources` }</span>
       </li>
       </ul>
     </div>
   </section>
 );
+
+Interactives.propTypes = {
+  totalDownloads: PropTypes.number.isRequired,
+};
 
 export default Interactives;

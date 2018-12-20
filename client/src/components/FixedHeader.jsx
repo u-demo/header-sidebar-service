@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TagRatingsEnroll from './TagRatingsEnroll.jsx';
 import styles from '../styles/FixedHeader.css';
 
@@ -10,5 +11,9 @@ const FixedHeader = ({ course }) => (
     </div>
   </div>
 );
+
+FixedHeader.propTypes = {
+  course: PropTypes.object.isRequired,
+};
 
 export default FixedHeader;

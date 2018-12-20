@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { renderCouponInput, changeCoursePrice, setCouponFailureMessage } from '../actions/couponActions';
 
 import Trailer from './Trailer.jsx';
@@ -77,7 +78,7 @@ class Sidebar extends React.Component {
 
     let coupon;
     if (!hasCoupon) {
-      coupon = <CouponDefault 
+      coupon = <CouponDefault
                   renderCouponInput={this.props.renderCouponInput}/>;
     } else {
       coupon = <CouponForm
@@ -99,12 +100,12 @@ class Sidebar extends React.Component {
           }
           <div className={ styles.belowTrailer }>
             <PurchaseBox
-              discount_price={ couponPrice || courseData.discount_price }
-              list_price={ courseData.list_price } />
+              discountPrice={ couponPrice || courseData.discount_price }
+              listPrice={ courseData.list_price } />
             <Features
-              video_hrs={ courseData.video_hrs }
-              total_articles={ courseData.total_articles } />
-            <Interactives total_downloads={ courseData.total_downloads }/>
+              videoHrs={ courseData.video_hrs }
+              totalArticles={ courseData.total_articles } />
+            <Interactives totalDownloads={ courseData.total_downloads }/>
             <section className={ styles.couponBox }>
               { coupon }
             </section>
@@ -115,6 +116,18 @@ class Sidebar extends React.Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  courseData: PropTypes.object.isRequired,
+  changeCoursePrice: PropTypes.func.isRequired,
+  couponUsed: PropTypes.bool.isRequired,
+  setCouponFailureMessage: PropTypes.func.isRequired,
+  sidebarFixed: PropTypes.bool.isRequired,
+  hasCoupon: PropTypes.bool.isRequired,
+  couponPrice: PropTypes.string.isRequired,
+  couponMessage: PropTypes.string.isRequired,
+  renderCouponInput: PropTypes.func.isRequired,
+};
 
 const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar);
 

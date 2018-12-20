@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from '../styles/PurchaseBox.css';
 
 const percentOff = (discount, list) => {
@@ -14,12 +15,12 @@ const percentOff = (discount, list) => {
   return `${totalPercentOff}%`;
 };
 
-const PurchaseBox = ({ discount_price, list_price }) => (
+const PurchaseBox = ({ discountPrice, listPrice }) => (
   <section>
     <div className={ styles.priceBox }>
-      <div className={ `${styles.discountPrice} ${styles.price}` }><strong>{ discount_price }</strong></div>
-      <div className={ `${styles.listPrice} ${styles.price}` }>{ list_price }</div>
-      <div className={ `${styles.percentOffItem} ${styles.price}` }><span>{ `${percentOff(discount_price, list_price)} off` }</span></div>
+      <div className={ `${styles.discountPrice} ${styles.price}` }><strong>{ discountPrice }</strong></div>
+      <div className={ `${styles.listPrice} ${styles.price}` }>{ listPrice }</div>
+      <div className={ `${styles.percentOffItem} ${styles.price}` }><span>{ `${percentOff(discountPrice, listPrice)} off` }</span></div>
     </div>
     <div className={ styles.btnBox }>
       <button className={ `${styles.cartAddBtn} ${styles.buyBtn}` }>Add to Cart</button>
@@ -30,5 +31,10 @@ const PurchaseBox = ({ discount_price, list_price }) => (
     <div className={ styles.guarantee }>30-Day Money-Back Guarantee</div>
   </section>
 );
+
+PurchaseBox.propTypes = {
+  listPrice: PropTypes.string.isRequired,
+  discountPrice: PropTypes.string.isRequired,
+};
 
 export default PurchaseBox;
