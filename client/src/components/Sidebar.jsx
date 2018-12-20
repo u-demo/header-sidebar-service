@@ -31,9 +31,12 @@ class Sidebar extends React.Component {
     this.state = {
       pointerOnTrailer: false,
     };
+
     this.trailerHoverHandler = this.trailerHoverHandler.bind(this);
     this.changePrice = this.changePrice.bind(this);
     this.validateCoupon = this.validateCoupon.bind(this);
+    this.couponInput = null;
+    this.setCouponInputRef = (node) => { this.couponInput = node; };
   }
 
   trailerHoverHandler() {
@@ -54,7 +57,7 @@ class Sidebar extends React.Component {
   validateCoupon() {
     if (this.props.couponUsed) {
       this.props.setCouponFailureMessage('Can only use a coupon once.');
-    } else if (this.input.value === this.props.courseData.active_coupon) {
+    } else if (this.couponInput.value === this.props.courseData.active_coupon) {
       this.changePrice();
     } else {
       // dispatch invalid coupon message
@@ -78,7 +81,7 @@ class Sidebar extends React.Component {
       coupon = <CouponForm
                   validateCoupon={this.validateCoupon}
                   couponMessage={couponMessage}
-                  inputRef={(node) => { this.input = node; }}/>;
+                  inputRef={this.setCouponInputRef}/>;
     }
 
     return (
