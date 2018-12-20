@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/ShareBox.css';
 
-const ShareBox = props => (
+const ShareBox = () => (
   <section>
     <div className={ styles.delineation }></div>
     <div className={ styles.shareInviteContainer }>

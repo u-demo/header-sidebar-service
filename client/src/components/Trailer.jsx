@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Trailer.css';
@@ -9,7 +10,7 @@ const Trailer = (props) => {
     <section className={ styles.trailerBox }>
       <div className={ styles.trailerContainer }>
         <div className={ styles.trailer }>
-          <img alt="" className={ `${styles.courseImg} ${styles.sidebarImg}` } src="http://www.avsnap.com/a_downloads/backgrounds/SpaceT%20640x480.png" /> 
+          <img alt="" className={ `${styles.courseImg} ${styles.sidebarImg}` } src="http://www.avsnap.com/a_downloads/backgrounds/SpaceT%20640x480.png" />
           <div className={ `${styles.playbtn} ${styles.sidebarImg}` }
             onMouseEnter={ () => props.trailerHoverHandler() }
             onMouseLeave={ () => props.trailerHoverHandler() }>
@@ -21,6 +22,11 @@ const Trailer = (props) => {
       </div>
     </section>
   );
+};
+
+Trailer.propTypes = {
+  onTrailer: PropTypes.bool.isRequired,
+  trailerHoverHandler: PropTypes.func.isRequired,
 };
 
 export default Trailer;

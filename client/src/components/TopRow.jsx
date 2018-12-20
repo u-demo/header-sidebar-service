@@ -11,16 +11,16 @@ class TopRow extends React.Component {
       clicked: false,
       hover: false,
     };
+    this.handleHover = this.handleHover.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleHover() {
-    if (this.state.clicked) {
-      return;
+    if (!this.state.clicked) {
+      this.setState({
+        hover: !this.state.hover,
+      });
     }
-
-    this.setState({
-      hover: !this.state.hover,
-    });
   }
 
   handleClick() {
@@ -42,8 +42,11 @@ class TopRow extends React.Component {
       <div className={ styles.topRow }>
         <div className={ styles.topRowContent }>
           <div className={ styles.giftText }>Gift This Course</div>
-          <div className={ styles.heart } onClick={ () => this.handleClick() }
-            onMouseEnter={ () => this.handleHover() } onMouseLeave={ () => this.handleHover() }>
+          <div
+            className={ styles.heart }
+            onClick={this.handleClick}
+            onMouseEnter={this.handleHover}
+            onMouseLeave={this.handleHover } >
             <FontAwesomeIcon icon={ heart } style={ { color: 'rgb(236, 82, 82)' } } />
           </div>
         </div>

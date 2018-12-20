@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import HeaderStars from './HeaderStars.jsx';
 import styles from '../styles/TagRatingsEnroll.css';
 
@@ -39,6 +40,11 @@ const TagRatingsEnroll = ({ course, isHeaderFixed }) => {
       <div>{ `${course.enrollment} students enrolled` }</div>
     </section>
   );
+};
+
+TagRatingsEnroll.propTypes = {
+  course: PropTypes.object.isRequired,
+  isHeaderFixed: PropTypes.bool.isRequired,
 };
 
 export default TagRatingsEnroll;

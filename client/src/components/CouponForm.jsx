@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from '../styles/CouponForm.css';
 
 const CouponForm = ({ validateCoupon, couponMessage, inputRef }) => (
@@ -17,5 +18,11 @@ const CouponForm = ({ validateCoupon, couponMessage, inputRef }) => (
     </div>
   </div>
 );
+
+CouponForm.propTypes = {
+  validateCoupon: PropTypes.func.isRequired,
+  couponMessage: PropTypes.string.isRequired,
+  inputRef: PropTypes.func.isRequired,
+};
 
 export default CouponForm;

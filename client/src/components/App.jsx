@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import fetchCourseData from '../actions/fetchCourse';
 
 import Header from './Header.jsx';
@@ -102,6 +103,14 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  fetchCourseData: PropTypes.func.isRequired,
+  fetchError: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  courseData: PropTypes.object.isRequired,
+};
+
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;

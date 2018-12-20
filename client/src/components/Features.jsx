@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -6,7 +7,7 @@ import styles from '../styles/Features.css';
 
 const articleOrArticles = hours => (hours === 1 ? 'article' : 'articles');
 
-const Features = ({ video_hrs, total_articles }) => (
+const Features = ({ videoHrs, totalArticles }) => (
   <section>
     <div>
       <strong>Includes</strong>
@@ -17,13 +18,13 @@ const Features = ({ video_hrs, total_articles }) => (
           <span className={ styles.featureIcon }>
             <FontAwesomeIcon icon={ far.faFileVideo } fixedWidth/>
           </span>
-          <span className={ styles.featureText }>{ `${video_hrs} hours on-demand video` }</span>
+          <span className={ styles.featureText }>{ `${videoHrs} hours on-demand video` }</span>
         </li>
         <li>
           <span className={ styles.featureIcon }>
             <FontAwesomeIcon icon={ far.faFile } fixedWidth/>
           </span>
-          <span className={ styles.featureText }>{ `${total_articles} ${articleOrArticles(total_articles)}` }</span>
+          <span className={ styles.featureText }>{ `${totalArticles} ${articleOrArticles(totalArticles)}` }</span>
         </li>
         <li>
           <span className={ styles.featureIcon }>
@@ -47,5 +48,10 @@ const Features = ({ video_hrs, total_articles }) => (
     </div>
   </section>
 );
+
+Features.propTypes = {
+  videoHrs: PropTypes.number.isRequired,
+  totalArticles: PropTypes.number.isRequired,
+};
 
 export default Features;

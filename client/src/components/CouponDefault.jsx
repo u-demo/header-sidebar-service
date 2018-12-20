@@ -1,11 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { renderCouponInput } from '../actions/couponActions';
+import PropTypes from 'prop-types';
 import styles from '../styles/CouponDefault.css';
-
-const mapDispatchToProps = {
-  renderCouponInput,
-};
 
 const CouponDefault = ({ renderCouponInput }) => (
   <div className={ styles.defaultCouponArea }>
@@ -14,6 +9,8 @@ const CouponDefault = ({ renderCouponInput }) => (
   </div>
 );
 
-const CouponDefaultContainer = connect(null, mapDispatchToProps)(CouponDefault);
+CouponDefault.propTypes = {
+  renderCouponInput: PropTypes.func.isRequired,
+};
 
-export default CouponDefaultContainer;
+export default CouponDefault;
