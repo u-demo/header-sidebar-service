@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { renderCouponInput, changeCoursePrice, setCouponFailureMessage } from '../actions/couponActions';
+import { showModal } from '../actions/modalActions';
 
 import Trailer from './Trailer.jsx';
 import PurchaseBox from './PurchaseBox.jsx';
@@ -12,20 +14,6 @@ import CouponForm from './CouponForm.jsx';
 import ShareBox from './ShareBox.jsx';
 
 import styles from '../styles/Sidebar.css';
-
-const mapStateToProps = ({ courseDetails, couponInput }) => ({
-  courseData: courseDetails.courseData,
-  hasCoupon: couponInput.hasCoupon,
-  couponPrice: couponInput.couponPrice,
-  couponUsed: couponInput.couponUsed,
-  couponMessage: couponInput.couponMessage,
-});
-
-const mapDispatchToProps = {
-  renderCouponInput,
-  changeCoursePrice,
-  setCouponFailureMessage,
-};
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -96,7 +84,8 @@ class Sidebar extends React.Component {
           && <Trailer
               img={ courseData.img_url }
               onTrailer={ this.state.pointerOnTrailer }
-              trailerHoverHandler={ this.trailerHoverHandler } />
+              trailerHoverHandler={ this.trailerHoverHandler }
+              showModal={this.props.showModal} />
           }
           <div className={ styles.belowTrailer }>
             <PurchaseBox
@@ -117,6 +106,23 @@ class Sidebar extends React.Component {
   }
 }
 
+const mapStateToProps = ({ courseDetails, couponInput }) => ({
+  courseData: courseDetails.courseData,
+  hasCoupon: couponInput.hasCoupon,
+  couponPrice: couponInput.couponPrice,
+  couponUsed: couponInput.couponUsed,
+  couponMessage: couponInput.couponMessage,
+});
+
+const mapDispatchToProps = {
+  renderCouponInput,
+  changeCoursePrice,
+  setCouponFailureMessage,
+  showModal,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+
 Sidebar.propTypes = {
   courseData: PropTypes.object.isRequired,
   changeCoursePrice: PropTypes.func.isRequired,
@@ -127,8 +133,5 @@ Sidebar.propTypes = {
   couponPrice: PropTypes.string.isRequired,
   couponMessage: PropTypes.string.isRequired,
   renderCouponInput: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
-
-const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar);
-
-export default SidebarContainer;
