@@ -3,38 +3,38 @@ const Promise = require('bluebird');
 require('dotenv').config();
 
 // use below to run locally
-// const connection = mysql.createConnection({
-//   user: process.env.DB_USER,
-//   database: process.env.DB_DATABASE,
-// });
+const connection = mysql.createConnection({
+  user: 'root',
+  database: process.env.DB_DATABASE,
+});
 
 // use below to run from aws
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
-});
+// let connection = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASS,
+//   database: process.env.DB_DATABASE,
+//   port: process.env.DB_PORT,
+// });
 
-const handleDisconnect = () => {
-  connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_DATABASE,
-    port: process.env.DB_PORT,
-  });
-};
+// const handleDisconnect = () => {
+//   connection = mysql.createConnection({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASS,
+//     database: process.env.DB_DATABASE,
+//     port: process.env.DB_PORT,
+//   });
+// };
 
-connection.on('error', (err) => {
-  if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-    console.log('IDLE DISCONNECT!');
-    handleDisconnect();
-  } else {
-    throw new Error(err);
-  }
-});
+// connection.on('error', (err) => {
+//   if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+//     console.log('IDLE DISCONNECT!');
+//     handleDisconnect();
+//   } else {
+//     throw new Error(err);
+//   }
+// });
 
 const db = Promise.promisifyAll(connection, { multiArgs: true });
 

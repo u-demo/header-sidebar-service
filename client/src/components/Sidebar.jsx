@@ -121,8 +121,6 @@ const mapDispatchToProps = {
   showModal,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
-
 Sidebar.propTypes = {
   courseData: PropTypes.object.isRequired,
   changeCoursePrice: PropTypes.func.isRequired,
@@ -135,3 +133,5 @@ Sidebar.propTypes = {
   renderCouponInput: PropTypes.func.isRequired,
   showModal: PropTypes.func.isRequired,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

@@ -106,11 +106,11 @@ const mapDispatchToProps = {
   fetchCourseData,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-
 App.propTypes = {
   fetchCourseData: PropTypes.func.isRequired,
   fetchError: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   courseData: PropTypes.object.isRequired,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

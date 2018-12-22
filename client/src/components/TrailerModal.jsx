@@ -17,7 +17,7 @@ class TrailerModal extends React.Component {
     return (
       <Modal onClose={this.onClose}>
          <div>
-           <h1>Trailer Pop Up</h1>
+           <iframe src="https://www.youtube.com/embed/18rARy8g4Hc" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
          </div>
       </Modal>
     );

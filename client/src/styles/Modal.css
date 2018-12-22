@@ -26,13 +26,6 @@
   cursor: pointer;
 }
 
-/* .modalContent:after {
-  vertical-align: middle;
-  display: inline-block;
-  height: 100%;
-  content: '';
-} */
-
 .modalDialog {
   position: relative;
   outline: 0;
@@ -43,4 +36,12 @@
   max-width: auto;
   cursor: default;
   border-radius: 4px;
+}
+
+iframe {
+  display: block;
+  background: #000;
+  border: none;
+  width: 560px;
+  height: 315px;
 }

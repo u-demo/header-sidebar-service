@@ -25,11 +25,10 @@ const Trailer = (props) => {
   );
 };
 
-
-export default Trailer;
-
 Trailer.propTypes = {
   onTrailer: PropTypes.bool.isRequired,
   trailerHoverHandler: PropTypes.func.isRequired,
   showModal: PropTypes.func.isRequired,
 };
+
+export default Trailer;
