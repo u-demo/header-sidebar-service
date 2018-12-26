@@ -79,7 +79,9 @@ class App extends React.Component {
       <div>
         <div className={ styles.banner }>
           <div className={ styles.container }>
-            <TopRow />
+            <div>
+              <TopRow />
+            </div>
             <div className={ styles.contentBox }>
               <Header course={ courseData } />
               <Sidebar sidebarFixed={ this.state.sidebarFixed } />

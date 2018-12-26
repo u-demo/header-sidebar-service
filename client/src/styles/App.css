@@ -3,17 +3,45 @@
   padding-bottom: 60px;
   background-color: #29303b;
   color: #fff;
-  min-width: 975px;
+  min-width: 360px;
 }
 
 .container {
-  /* width: 70%;
-  margin-left: 15%;
-  margin-right: 15%; */
-  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+@media only screen and (min-width: 360px) {
+  .container {
+      width: 340px;
+  }
+}
+
+@media only screen and (min-width: 414px) {
+  .container {
+      width: 386px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+      width: 730px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .container {
+      width: 970px;
+  } 
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+      width: 1170px;
+  }
 }
 
 .contentBox {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }

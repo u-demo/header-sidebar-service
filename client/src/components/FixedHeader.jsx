@@ -6,8 +6,10 @@ import styles from '../styles/FixedHeader.css';
 const FixedHeader = ({ course }) => (
   <div className={ styles.fixedBanner }>
     <div className={ styles.fixedContent }>
-      <p className={ styles.smallTitle }><strong>{ course.title }</strong></p>
-      <TagRatingsEnroll course={ course } isHeaderFixed={ true } />
+      <div className={ styles.fixedContentWrapper }>
+        <p className={ styles.smallTitle }><strong>{ course.title }</strong></p>
+        <TagRatingsEnroll course={ course } isHeaderFixed={ true } />
+      </div>
     </div>
   </div>
 );
