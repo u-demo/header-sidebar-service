@@ -90,7 +90,8 @@ class Sidebar extends React.Component {
           <div className={ styles.belowTrailer }>
             <PurchaseBox
               discountPrice={ couponPrice || courseData.discount_price }
-              listPrice={ courseData.list_price } />
+              listPrice={ courseData.list_price }
+              showModal={this.props.showModal} />
             <Features
               videoHrs={ courseData.video_hrs }
               totalArticles={ courseData.total_articles } />

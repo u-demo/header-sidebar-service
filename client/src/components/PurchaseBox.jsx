@@ -15,7 +15,7 @@ const percentOff = (discount, list) => {
   return `${totalPercentOff}%`;
 };
 
-const PurchaseBox = ({ discountPrice, listPrice }) => (
+const PurchaseBox = ({ discountPrice, listPrice, showModal }) => (
   <section>
     <div className={ styles.priceBox }>
       <div className={ `${styles.discountPrice} ${styles.price}` }><strong>{ discountPrice }</strong></div>
@@ -23,7 +23,9 @@ const PurchaseBox = ({ discountPrice, listPrice }) => (
       <div className={ `${styles.percentOffItem} ${styles.price}` }><span>{ `${percentOff(discountPrice, listPrice)} off` }</span></div>
     </div>
     <div className={ styles.btnBox }>
-      <button className={ `${styles.cartAddBtn} ${styles.buyBtn}` }>Add to Cart</button>
+      <button className={ `${styles.cartAddBtn} ${styles.buyBtn}` }
+        onClick={() => showModal('ADD_TO_CART_MODAL')}
+      >Add to Cart</button>
     </div>
     <div className={ styles.btnBox }>
       <button className={ `${styles.buyNowBtn} ${styles.buyBtn}` }>Buy now</button>
@@ -35,6 +37,7 @@ const PurchaseBox = ({ discountPrice, listPrice }) => (
 PurchaseBox.propTypes = {
   listPrice: PropTypes.string.isRequired,
   discountPrice: PropTypes.string.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default PurchaseBox;

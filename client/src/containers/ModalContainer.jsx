@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { hideModal } from '../actions/modalActions';
 // Modal Components
 import TrailerModal from '../components/TrailerModal.jsx';
-// import AddToCartModal from '../components/AddToCartModal';
+import AddToCartModal from '../components/AddToCartModal.jsx';
 
 
 const MODAL_COMPONENTS = {
   TRAILER_MODAL: TrailerModal,
-  // ADD_TO_CART_MODAL: AddToCartModal,
+  ADD_TO_CART_MODAL: AddToCartModal,
 };
 
 const ModalContainer = (props) => {
