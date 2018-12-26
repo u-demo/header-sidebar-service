@@ -26,7 +26,7 @@ h3, .tagRatingsEnroll, .authorUpdate {
   vertical-align: baseline;
   top: -2.6px;
   font-weight: 400;
-  font-size: 0.9em;
+  font-size: 13px;
 }
 
 .tag:after {
@@ -36,10 +36,10 @@ h3, .tagRatingsEnroll, .authorUpdate {
   position: absolute;
   transform: rotate(45deg);
   z-index: -1;
-  width: 18.5px;
-  height: 16.7px;
-  top: 2.35px;
-  right: -8px;
+  width: 16.3px;
+  height: 14.3px;
+  top: 2.25px;
+  right: -6.5px;
   vertical-align: baseline;
 }
 
