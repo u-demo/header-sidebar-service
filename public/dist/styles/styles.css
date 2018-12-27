@@ -29,6 +29,14 @@
   }
 }
 
+iframe {
+  display: block;
+  background: #000;
+  border: none;
+  width: 560px;
+  height: 315px;
+}
+
 /* Remove me after testing 
 *
 *

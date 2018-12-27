@@ -37,11 +37,3 @@
   cursor: default;
   border-radius: 4px;
 }
-
-iframe {
-  display: block;
-  background: #000;
-  border: none;
-  width: 560px;
-  height: 315px;
-}

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Modal from './Modal.jsx';
+import styles from '../styles/MessageModal.css';
 
 class AddToCartModal extends React.Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class AddToCartModal extends React.Component {
   render() {
     return (
       <Modal onClose={this.onClose}>
-         <div>
-           <p>This has been added!</p>
+         <div className={ styles.wrapper }>
+          <p>This course has been added!</p>
          </div>
       </Modal>
     );
