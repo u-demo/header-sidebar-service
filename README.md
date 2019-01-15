@@ -1,13 +1,13 @@
 # Project Name
 
-> Project description
+Header and sidebar components of u-demo online learning application
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/u-demo/instructors-service
+  - https://github.com/u-demo/student-feedback
+  - https://github.com/u-demo/students-also-bought-service
+  - https://github.com/u-demo/header-sidebar-proxy
 
 ## Table of Contents
 
