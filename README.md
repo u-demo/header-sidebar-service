@@ -1,4 +1,4 @@
-# Project Name
+# U-Demo
 
 Header and sidebar components of u-demo online learning application
 
