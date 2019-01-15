@@ -6,15 +6,15 @@
 }
 
 .price {
-  padding: 5px 2px 10px 2px;
+  padding-right: 2px;
 }
 
 .discountPrice {
-  font-size: 2vw;
+  font-size: 2em;
 }
 
 .listPrice, .percentOffItem {
-  font-size: 1.2vw;
+  font-size: 1.2em;
   color: #a1a7b3;
 }
 
@@ -24,7 +24,7 @@
 
 .btnBox, .guarantee {
   width: 100%;
-  margin-bottom: 10px;
+  margin: 10px 0;
   display: flex;
   justify-content: center; 
 }

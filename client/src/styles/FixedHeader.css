@@ -5,12 +5,45 @@
   opacity: 0.8;
   background-color: #29303b;
   color: #fff;
-  min-width: 975px;
   z-index: 1;
 }
 
 .fixedContent {
-  padding-left: 5%;
+  margin: 0 auto;
+}
+
+.fixedContentWrapper {
+  width: 66.666667%;
+}
+
+@media only screen and (min-width: 360px) {
+  .fixedContent {
+      width: 340px;
+  }
+}
+
+@media only screen and (min-width: 414px) {
+  .fixedContent {
+      width: 95%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .fixedContent {
+      width: 730px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .fixedContent {
+      width: 970px;
+  } 
+}
+
+@media only screen and (min-width: 1200px) {
+  .fixedContent {
+      width: 1170px;
+  }
 }
 
 .smallTitle {

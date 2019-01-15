@@ -1,6 +1,11 @@
 .leftCol {
   width: calc(100% * 2/3);
-  margin-left:5%;
+}
+
+@media only screen and (max-width: 414px) {
+  .leftCol {
+      width: 210px;
+  }
 }
 
 .titles {

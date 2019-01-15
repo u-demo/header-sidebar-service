@@ -7,18 +7,9 @@ import Header from './Header.jsx';
 import FixedHeader from './FixedHeader.jsx';
 import Sidebar from './Sidebar.jsx';
 import TopRow from './TopRow.jsx';
+import ModalContainer from '../containers/ModalContainer.jsx';
 
 import styles from '../styles/App.css';
-
-const mapStateToProps = ({ courseDetails: { courseData, isLoading, fetchError } }) => ({
-  courseData,
-  isLoading,
-  fetchError,
-});
-
-const mapDispatchToProps = {
-  fetchCourseData,
-};
 
 class App extends React.Component {
   constructor(props) {
@@ -88,7 +79,9 @@ class App extends React.Component {
       <div>
         <div className={ styles.banner }>
           <div className={ styles.container }>
-            <TopRow />
+            <div>
+              <TopRow />
+            </div>
             <div className={ styles.contentBox }>
               <Header course={ courseData } />
               <Sidebar sidebarFixed={ this.state.sidebarFixed } />
@@ -99,10 +92,21 @@ class App extends React.Component {
           ? <FixedHeader course={ courseData } />
           : null
         }
+        <ModalContainer />
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ courseDetails: { courseData, isLoading, fetchError } }) => ({
+  courseData,
+  isLoading,
+  fetchError,
+});
+
+const mapDispatchToProps = {
+  fetchCourseData,
+};
 
 App.propTypes = {
   fetchCourseData: PropTypes.func.isRequired,
@@ -111,6 +115,4 @@ App.propTypes = {
   courseData: PropTypes.object.isRequired,
 };
 
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default AppContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

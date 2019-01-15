@@ -12,8 +12,9 @@ const Trailer = (props) => {
         <div className={ styles.trailer }>
           <img alt="" className={ `${styles.courseImg} ${styles.sidebarImg}` } src="http://www.avsnap.com/a_downloads/backgrounds/SpaceT%20640x480.png" />
           <div className={ `${styles.playbtn} ${styles.sidebarImg}` }
-            onMouseEnter={ () => props.trailerHoverHandler() }
-            onMouseLeave={ () => props.trailerHoverHandler() }>
+            onMouseEnter={props.trailerHoverHandler}
+            onMouseLeave={props.trailerHoverHandler}
+            onClick={() => props.showModal('TRAILER_MODAL')}>
             <FontAwesomeIcon className={ styles.playbtnIcon }
               icon={ faPlayCircle } style={ btnSize() }/>
           </div>
@@ -27,6 +28,7 @@ const Trailer = (props) => {
 Trailer.propTypes = {
   onTrailer: PropTypes.bool.isRequired,
   trailerHoverHandler: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default Trailer;
