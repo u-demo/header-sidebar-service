@@ -11,22 +11,17 @@ Header and sidebar components of u-demo online learning application
 
 ## Table of Contents
 
-1. [Usage](#Usage)
-2. [Requirements](#Requirements)
-3. [Development](#Development)
-4. [Testing](#Testing)
-5. [API Documentation](#API-Documentation)
-
-## Usage
-
-> Some usage instructions
+1. [Requirements](#Requirements)
+2. [Development](#Development)
+3. [Testing](#Testing)
+4. [API Documentation](#API-Documentation)
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node ^6.13.0
-- MySQL 5.7.23
+- Cassandra 3.11.3
 
 ## Development
 
