@@ -12,8 +12,9 @@ Header and sidebar components of u-demo online learning application
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+2. [Requirements](#requirements)
+3. [Development](#development)
+4. [Testing](#Testing)
 
 ## Usage
 
@@ -32,6 +33,7 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 From within the root directory:
 ```
+npm install -g webpack
 npm install
 ```
 Create and seed DB `headerSidebar`:
@@ -46,3 +48,5 @@ Start Server:
 ```
 npm start
 ```
+## Testing
+This project uses Jest/Enzyme unit testing. You can run them by `npm run test`.
