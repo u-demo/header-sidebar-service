@@ -12,9 +12,10 @@ Header and sidebar components of u-demo online learning application
 ## Table of Contents
 
 1. [Usage](#Usage)
-2. [Requirements](#requirements)
-3. [Development](#development)
+2. [Requirements](#Requirements)
+3. [Development](#Development)
 4. [Testing](#Testing)
+5. [API Documentation](#API-Documentation)
 
 ## Usage
 
@@ -49,4 +50,12 @@ Start Server:
 npm start
 ```
 ## Testing
-This project uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) unit testing. You can run them by `npm run test`.
+This project uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) unit testing. You can run them by executing `npm run test` on the command line.
+
+## API-Documentation
+
+| Description | Method | Endpoint |
+| --- | --- | --- |
+| Get course header & sidebar data | GET | `/courses/:courseId/header` |
+
+
