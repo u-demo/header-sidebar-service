@@ -23,8 +23,8 @@ Header and sidebar components of u-demo online learning application
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
-- Node 6.13.0
-- etc
+- Node ^6.13.0
+- MySQL 5.7.23
 
 ## Development
 
