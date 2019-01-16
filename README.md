@@ -49,4 +49,4 @@ Start Server:
 npm start
 ```
 ## Testing
-This project uses Jest/Enzyme unit testing. You can run them by `npm run test`.
+This project uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) unit testing. You can run them by `npm run test`.
