@@ -31,8 +31,18 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 ### Installing Dependencies
 
 From within the root directory:
-
+```
 npm install
+```
+Create and seed DB `headerSidebar`:
+```
 npm run seed
+```
+Build Dev Bundle (uses --watch function): 
+```
 npm run build
-nom start
+```
+Start Server:
+```
+npm start
+```
