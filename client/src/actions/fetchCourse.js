@@ -16,7 +16,7 @@ const fetchCourseFailure = error => ({
 
 const fetchCourseData = () => (
   (dispatch) => {
-    dispatch(fetchCourseRequest);
+    dispatch(fetchCourseRequest); // initiate spinner
     // window.location.pathname === '/courses/66/'
     return requests.getCourseData(window.location.pathname)
       .then(({ response, body }) => {
